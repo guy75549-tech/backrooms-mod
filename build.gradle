@@ -1,0 +1,68 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+group = 'com.guy75549.backrooms'
+version = '1.0.0'
+base { archivesName = 'backrooms' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'debug'
+            mods { backrooms { source sourceSets.main } }
+        }
+        client {}
+        server { args '--nogui' }
+    }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+}
+
+processResources {
+    def replaceProperties = [
+            minecraft_version: '1.20.1',
+            minecraft_version_range: '[1.20.1,1.21)',
+            forge_version: '47.2.0',
+            forge_version_range: '[47,)',
+            loader_version_range: '[47,)',
+            mod_id: 'backrooms',
+            mod_name: 'The Backrooms',
+            mod_license: 'MIT',
+            mod_version: project.version,
+            mod_authors: 'guy75549-tech',
+            mod_description: 'A liminal-space themed Minecraft mod. Find your way through the familiar, endless rooms.'
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand replaceProperties }
+}
+
+jar {
+    manifest.attributes([
+            'Specification-Title': 'backrooms',
+            'Specification-Vendor': 'guy75549-tech',
+            'Specification-Version': '1',
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.jar.archiveVersion,
+            'Implementation-Vendor': 'guy75549-tech'
+    ])
+    finalizedBy 'reobfJar'
+}
+
+publishing {
+    publications { mavenJava(MavenPublication) { artifact jar } }
+    repositories { maven { url "${project.projectDir}/ repo" } }
+}

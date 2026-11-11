@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["YYY", "Y Y", "YYY"],
+  "key": { "Y": { "item": "minecraft:yellow_concrete" } },
+  "result": { "item": "backrooms:yellow_wallpaper", "count": 8 }
+}

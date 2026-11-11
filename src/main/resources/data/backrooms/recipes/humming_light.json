@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" G ", "GBG", " G "],
+  "key": {
+    "G": { "item": "minecraft:glowstone_dust" },
+    "B": { "item": "minecraft:iron_bars" }
+  },
+  "result": { "item": "backrooms:humming_light", "count": 1 }
+}

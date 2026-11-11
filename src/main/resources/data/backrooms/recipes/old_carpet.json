@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["YY"],
+  "key": { "Y": { "item": "minecraft:yellow_wool" } },
+  "result": { "item": "backrooms:old_carpet", "count": 3 }
+}
